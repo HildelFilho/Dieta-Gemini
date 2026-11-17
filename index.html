@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -25,15 +25,16 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--bg:#262624;--surface:#30302E;--ink:#F0EFE8;--muted:#A3A29B;--line:#44433F;--accent:hsl(var(--ah) calc(var(--as)*.65) 56%);--accent-ink:hsl(var(--ah) 60% 8%);--p:#FF7A70;--c:#7B9BFF;--f:#F2C94C;--over:#FF7A6B;--track:#3C3B38;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
 html, body {
+  margin: 0;
   background-color: var(--bg) !important;
+  color: var(--ink);
   overscroll-behavior-y: none;
+  font: 16px/1.45 "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 .tb {
   background-color: var(--surface) !important;
-}
-font:16px/1.45 "Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+} "Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:520px;margin:0 auto;padding:16px 16px 48px}
 .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .nav b{font-size:17px;font-weight:700}
@@ -156,7 +157,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 </style>
 <script>try{var a=localStorage.getItem('dieta-hsl');if(a){a=a.split('|');var r=document.documentElement.style;r.setProperty('--ah',a[0]);r.setProperty('--as',a[1]+'%');r.setProperty('--al',a[2]+'%')}var t=localStorage.getItem('dieta-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 
-
 <script>
 function updateThemeColor() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
@@ -184,7 +184,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', upd
     <div class="bar" style="margin-top:12px"><i id="kbar"></i></div>
   </section>
   <section class="mac" id="mac"></section>
-
 
   <section class="card">
     <h2>Registrar refeição</h2>
@@ -214,12 +213,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', upd
     </div>
   </section>
 
-
   <section class="card">
     <div class="lh"><h2>Refeições do dia</h2><button class="lnk" id="copy">Copiar de ontem</button></div>
     <div id="list"></div>
   </section>
-
 
   <section class="card">
     <h2>Peso do dia</h2>
@@ -230,7 +227,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', upd
   </section>
 </section>
 
-
 <section class="tab" id="t-hist">
   <h1 class="ph">Histórico</h1>
   <section class="card">
@@ -239,7 +235,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', upd
     <div id="hist"></div>
   </section>
 </section>
-
 
 <section class="tab" id="t-set">
   <h1 class="ph">Ajustes</h1>
@@ -307,7 +302,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', upd
   <button data-p="hist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg>Histórico</button>
   <button data-p="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10"/><path d="M18 7h2"/><circle cx="16" cy="7" r="2"/><path d="M4 17h2"/><path d="M10 17h10"/><circle cx="8" cy="17" r="2"/></svg>Ajustes</button>
 </nav>
-
 
 <div id="mdl" class="hide" role="dialog" aria-modal="true"><div class="mbox"><h2 id="mdt"></h2><p class="prev" id="mdm"></p><input id="mdi" type="number" inputmode="decimal" min="0" class="hide"><div class="g2" style="margin:14px 0 0"><button class="btn sec" id="mdc" style="margin:0">Cancelar</button><button class="btn" id="mdo">OK</button></div></div></div>
 <div id="toast" class="hide" role="status" aria-live="polite"><span id="tmsg"></span><button id="tund">Desfazer</button></div>
@@ -401,10 +395,8 @@ function r1(n){return Math.round(n*10)/10}
 function items(k){return S.days[k]||(S.days[k]=[])}
 function num(id){var v=parseFloat($(id).value.replace(',','.'));return isNaN(v)||v<0?0:v}
 
-
 var activeMealIndex=0;
 var collapsedMeals={};
-
 
 function render(){
   var g=S.goals,it=items(cur),t={k:0,p:0,c:0,f:0};
@@ -423,11 +415,9 @@ function render(){
   
   renderMealCarousel(it);
 
-
   if(document.activeElement!==$('wt'))$('wt').value=S.weights[cur]||'';
   if(TAB==='hist')hist();recents();swHint();
 }
-
 
 function renderMealCarousel(it){
   var listEl=$('list');
@@ -437,7 +427,6 @@ function renderMealCarousel(it){
   var li=it.filter(function(x){return x.meal===mName});
   var mk=li.reduce(function(a,x){return a+x.k},0);
   var isColl=collapsedMeals[mName];
-
 
   var html='<div class="meal-nav-header">'
     +'<div class="title-area" id="toggle-coll" title="Recolher / Expandir">'
@@ -449,7 +438,6 @@ function renderMealCarousel(it){
     +'</div>'
     +'</div>';
 
-
   html+='<div class="meal-content-wrap '+(isColl?'meal-collapsed':'')+'" id="meal-wrap">';
   if(li.length){
     html+='<div class="meal-items-container">'+li.map(function(x){
@@ -459,14 +447,11 @@ function renderMealCarousel(it){
   }
   html+='</div>';
 
-
   if(!it.length && activeMealIndex===0){
     html='<p class="prev">Deslize um item para a esquerda para editar ou excluir.</p>'+html;
   }
 
-
   listEl.innerHTML=html;
-
 
   $('prev-meal').onclick=function(){switchMeal(-1)};
   $('next-meal').onclick=function(){switchMeal(1)};
@@ -476,7 +461,6 @@ function renderMealCarousel(it){
   };
 }
 
-
 function switchMeal(dir){
   var wrap=$('meal-wrap');
   if(wrap)wrap.className='meal-content-wrap '+(dir>0?'slide-out':'slide-in');
@@ -485,7 +469,6 @@ function switchMeal(dir){
     render();
   },180);
 }
-
 
 function fillFoods(){
   foodOpts();
@@ -526,7 +509,6 @@ function addItem(){
   $('grams').value=f[5]||'';save();preview();render();
 }
 
-
 $('add').onclick=function(){unfocus();addItem()};
 $('food').onchange=function(){var f=curFood();if(f)$('grams').value=f[5]||'';preview()};$('grams').oninput=preview;$('addplan').onclick=function(){unfocus();addPlan()};
 $('prev').onclick=function(){cur=shift(cur,-1);hideToast();render()};
@@ -564,7 +546,6 @@ function foodList(){
   $('cfl').innerHTML=S.foods.length?'<p class="prev">Deslize para a esquerda para editar ou excluir.</p>'+S.foods.map(function(x,i){return swRow('data-fi',i,esc(x.n),x.g+' g: '+r1(x.k*x.g/100)+' kcal · P '+r1(x.p*x.g/100)+' · C '+r1(x.c*x.g/100)+' · G '+r1(x.f*x.g/100))}).join(''):'<p class="empty">Nenhum alimento salvo ainda.</p>';
 }
 
-
 function planList(){
   $('cplan').innerHTML=S.planos.length?S.planos.map(function(p,i){
     var desc=p[1].map(function(e){var f=getFoodObj(e[0]);return f?(f.name+' ('+e[1]+'g)'):''}).filter(Boolean).join(', ');
@@ -579,7 +560,6 @@ $('cplan').onclick=function(e){
   save();planOpts();planList();
   toast('Plano excluído.');
 };
-
 
 var planBuilderRows=[];
 function renderPlanBuilder(){
@@ -626,7 +606,6 @@ $('plsave').onclick=function(){
   toast('Plano salvo com sucesso!');
 };
 renderPlanBuilder();
-
 
 function editItem(id){
   var x=items(cur).filter(function(i){return i.id===id})[0];if(!x)return;
